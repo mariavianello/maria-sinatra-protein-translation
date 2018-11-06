@@ -27,7 +27,7 @@ class Protein
   end
 
   def self._codon_to_polypeptide(codon)
-    polypeptide = case codon
+    polypeptide = case codon.upcase
                   when 'AUG' then 'Methionine'
                   when 'UUU', 'UUC' then 'Phenylalanine'
                   when 'UUA', 'UUG' then 'Leucine'
