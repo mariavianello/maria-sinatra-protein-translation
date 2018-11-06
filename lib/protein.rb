@@ -1,57 +1,44 @@
-
-# https://exercism.io/my/solutions/9f64e8b6c9eb411986b4d48f2427938b
 class Protein
 
   def self.rna_to_polypeptides(string)
-    return Protein._not_valid if !Protein._multiple_of_three(string)
+    return _not_valid if !_multiple_of_three(string)
 
-    codon_array = Protein._translate_to_codons(string)
+    return _not_correct_chars if !_codon_chars?(string)
 
-    updated_codon_array = Protein._translate_to_polypeptide(codon_array)
+    codon_array = _translate_to_codons(string)
 
-    Protein._proteins(updated_codon_array)
+    updated_codon_array = _translate_to_polypeptide(codon_array)
+
+    _proteins(updated_codon_array)
   end
 
   private
-  def self._translate_to_polypeptide(array)
-    polypeptides = array.map{ |key| _codon_to_polypeptide(key) }
-  end
-
-  def self._proteins(array)
-    array.include?('') ? Protein._reject_terminating_codons(array) : array
-  end
-
-  def self._reject_terminating_codons(array)
-    terminating_index = array.find_index('')
-    array.delete_if.with_index{ |codon, index| index >= terminating_index }
-  end
-
-  def self._codon_to_polypeptide(codon)
-    polypeptide = case codon.upcase
-                  when 'AUG' then 'Methionine'
-                  when 'UUU', 'UUC' then 'Phenylalanine'
-                  when 'UUA', 'UUG' then 'Leucine'
-                  when 'UCU', 'UCC', 'UCA', 'UCG' then 'Serine'
-                  when 'UAU', 'UAC' then 'Tyrosine'
-                  when 'UGU', 'UGC' then 'Cysteine'
-                  when 'UGG' then 'Tryptophan'
-                  when 'UAA', 'UAG', 'UGA' then ''
-                  else 'ugg boots'
-                  end
-    polypeptide
-  end
-
 
   def self._not_valid
-    'Not a valid RNA sequence.'
+    ProteinUtils.not_valid
   end
 
   def self._multiple_of_three(string)
-    string.length.%(3).zero?
+    ProteinUtils.multiple_of_three(string)
+  end
+
+  def self._not_correct_chars
+    ProteinUtils.not_correct_chars
+  end
+
+  def self._codon_chars?(string)
+    ProteinUtils.codon_chars?(string)
   end
 
   def self._translate_to_codons(string)
-    codons = string.chars.each_slice(3).map(&:join)
+    ProteinUtils.translate_to_codons(string)
   end
 
+  def self._translate_to_polypeptide(codon_array)
+    ProteinUtils.translate_to_polypeptide(codon_array)
+  end
+
+  def self._proteins(updated_codon_array)
+    ProteinUtils.proteins(updated_codon_array)
+  end
 end

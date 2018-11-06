@@ -41,5 +41,4 @@ RSpec.describe ProteinApi do
       end
     end
   end
-
 end
