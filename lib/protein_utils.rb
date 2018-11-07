@@ -1,10 +1,9 @@
 class ProteinUtils
-
   def self.translate_to_polypeptide(array)
     polypeptides = array.map{ |key| codon_to_polypeptide(key) }
   end
 
-  def self.proteins(array)
+  def self.returns_proteins_before_stop_codons(array)
     array.include?('') ? reject_terminating_codons(array) : array
   end
 
@@ -23,7 +22,8 @@ class ProteinUtils
                   when 'UGU', 'UGC' then 'Cysteine'
                   when 'UGG' then 'Tryptophan'
                   when 'UAA', 'UAG', 'UGA' then ''
-                  else 'Oops! Something went wrong. Try again.'
+                  # else raise not_valid
+                  # else raise
                   end
     polypeptide
   end
@@ -47,6 +47,6 @@ class ProteinUtils
 
 
   def self.translate_to_codons(string)
-    codons = string.chars.each_slice(3).map(&:join)
+    string.chars.each_slice(3).map(&:join)
   end
 end

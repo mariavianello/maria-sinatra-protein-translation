@@ -1,5 +1,3 @@
-require 'app'
-require 'rack/test'
 
 RSpec.describe ProteinApi do
   include Rack::Test::Methods

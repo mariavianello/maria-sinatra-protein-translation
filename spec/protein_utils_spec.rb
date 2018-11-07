@@ -1,5 +1,3 @@
-require 'pry'
-
 RSpec.describe ProteinUtils do
 
   describe '.translate_to_polypeptides' do
@@ -25,31 +23,31 @@ RSpec.describe ProteinUtils do
     end
   end
 
-  describe '.proteins' do
+  describe '.returns_proteins_before_stop_codons' do
     context 'given an array with no empty string' do
       it 'returns the array' do
-        result = described_class.proteins( ['a'] )
+        result = described_class.returns_proteins_before_stop_codons( ['a'] )
         expect(result).to eq( ['a'] )
       end
     end
 
     context 'given '' as second element' do
       it 'returns only the first element' do
-        result = described_class.proteins( ['a', ''] )
+        result = described_class.returns_proteins_before_stop_codons( ['a', ''] )
         expect(result).to eq( ['a'] )
       end
     end
 
     context 'given an empty string as second element of 3 elements' do
       it 'returns only the first element' do
-        result = described_class.proteins( ['a', '', 'b'] )
+        result = described_class.returns_proteins_before_stop_codons( ['a', '', 'b'] )
         expect(result).to eq( ['a'] )
       end
     end
 
     context 'given '' as third element of 4' do
       it 'returns only the first two elements' do
-        result = described_class.proteins( ['a', 'b', '' ,'d', 'e'] )
+        result = described_class.returns_proteins_before_stop_codons( ['a', 'b', '' ,'d', 'e'] )
         expect(result).to eq( ['a', 'b'] )
       end
     end
@@ -83,6 +81,13 @@ RSpec.describe ProteinUtils do
       it 'returns an emtpy string' do
         result = described_class.codon_to_polypeptide( 'UAA' )
         expect(result).to eq( '' )
+      end
+    end
+
+    context 'given anything other than a codon' do
+      xit 'returns an exception' do
+        result = described_class.codon_to_polypeptide( 'bdj' )
+        expect(result).to eq('Not a valid RNA sequence.')
       end
     end
   end

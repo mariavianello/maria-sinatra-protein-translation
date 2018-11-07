@@ -1,5 +1,4 @@
 class Protein
-
   def self.rna_to_polypeptides(string)
     return _not_valid if !_multiple_of_three(string)
 

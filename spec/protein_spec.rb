@@ -1,5 +1,3 @@
-require 'pry'
-
 RSpec.describe Protein do
 
   describe '.rna_to_polypeptides' do
