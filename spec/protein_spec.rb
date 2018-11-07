@@ -1,5 +1,4 @@
 RSpec.describe Protein do
-
   describe '.rna_to_polypeptides' do
     context 'given a nonvalid rna sequence' do
       it 'returns invalid statement' do
